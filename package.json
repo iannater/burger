@@ -1,0 +1,24 @@
+{
+  "name": "burger",
+  "version": "1.0.0",
+  "description": "This is for my week 13 homework. We will be making a burger app where we devour burgers. Even through I am on a diet and trying to not eat burgers I will try to not think about how much I want a burger while making this.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iannater/burger.git"
+  },
+  "author": "Ian Nater",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iannater/burger/issues"
+  },
+  "homepage": "https://github.com/iannater/burger#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "mysql": "^2.18.1"
+  }
+}
