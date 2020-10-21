@@ -1,69 +1,40 @@
 let connection = require('./connection');
 
-function objToSql(obj) {
-    let arr = [];
-  
-    // loop through the keys and push the key/value as a string int arr
-    for (let key in obj) {
-      let value = obj[key];
-      // check to skip hidden properties
-      if (Object.hasOwnProperty.call(obj, key)) {
-        if (typeof value === "string" && value.indexOf(" ") >= 0) {
-          value = `'${value}'`;
-        }
-        arr.push(`${key}=${value}`);
-      }
-    }
-    // translate array of strings to a single comma-separated string
-    return arr.toString();
-  }
 
 const orm = {
-    selectAll: (table) => {
-        const queryString = "SELECT * FROM ??";
+    selectAll: (table, cb) => {
+        const queryString = `SELECT * FROM ${table}`;
         console.log(queryString);
         const query = connection.query(queryString, [table], (err, result) => {
             if (err) {
                 throw err;
             }
-            // console.log(`Compiled SQL: ${query.sql}`);
-            console.log(result);
+            cb(result)
         });
     },
-
-    insertOne: (table) => {
-        const queryString = `INSERT INTO ${table} (burger_name, devoured) VALUES(?,?)`;
+    // Need to add needed data below next to the table in query string
+    insertOne: (table, name, cb) => {
+        const queryString = `INSERT INTO ${table} (burger_name) VALUES ("${name}")`;
         console.log(queryString);
-        const query = connection.query(queryString, [table], (err, result) => {
+        const query = connection.query(queryString, [table, name], (err, result) => {
             if (err) {
                 throw err;
             }
-            // console.log(`Compiled SQL: ${query.sql}`);
-            console.log(result);
+            cb(result);
         });
 
     },
-
-    updateOne: (table, objColVals, condition, cb) => {
-        let queryString = `UPDATE ${table}`;
-    
-        queryString += " SET ";
-        queryString += objToSql(objColVals);
-        queryString += " WHERE ";
-        queryString += condition;
-    
+    updateOne: (table, condition, cb) => {
+        let queryString = `UPDATE ${table} SET devoured true WHERE ?`;
         console.log(queryString);
-        connection.query(queryString, (err, result) => {
+        connection.query(queryString, [condition], (err, result) => {
           if (err) {
             throw err;
           }
-    
-          console.log(result);
+          cb(result);
         });
 
     },
-
-
 }
 
 module.exports = orm;
