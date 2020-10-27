@@ -1,4 +1,4 @@
-<h1>Cats!</h1>
+<h1>Burgers!</h1>
 
 <h2>burgers not devoured</h2>
 
@@ -6,7 +6,10 @@
   {{#each burgers}}
     {{#unless this.devoured}}
       <h2>{{this.burger_name}}</h2>
-      <button class="devouredBtn"></button>
+      <form class="devouredForm">
+        <input type="hidden" class="burger_id" value={{this.id}}>
+        <button type="submit" class="devouredBtn">Eat Burger</button>
+      </form>
       {{/unless}}
   {{/each}}
 </ul>

@@ -4,6 +4,7 @@ const burgers = {
     selectAll:function(cb) {
       orm.selectAll("burgers", (results) => {
         cb(results);
+        
       });
     },
     insertOne: function(name, cb){
@@ -20,3 +21,8 @@ const burgers = {
   
   // Export the database functions for the controller (catsController.js).
   module.exports = burgers;
+
+
+  
+
+  

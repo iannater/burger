@@ -25,9 +25,9 @@ const orm = {
 
     },
     updateOne: (table, condition, cb) => {
-        let queryString = `UPDATE ${table} SET devoured true WHERE ?`;
+        let queryString = 'UPDATE ' + table + ' SET devoured = true WHERE ' + condition;
         console.log(queryString);
-        connection.query(queryString, [condition], (err, result) => {
+        connection.query(queryString, (err, result) => {
           if (err) {
             throw err;
           }
